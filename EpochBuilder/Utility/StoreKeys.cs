@@ -9,5 +9,6 @@ namespace EpochBuilder
         public const string WorldStoreKey = "world-store";
         public const string TagStoreKey = "tag-store";
         public const string CategoryStoreKey = "category-store";
+        public const string ProfileStoreKey = "profile-store";
     }
 }

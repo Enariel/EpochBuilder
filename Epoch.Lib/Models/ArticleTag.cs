@@ -10,9 +10,9 @@ namespace Epoch.Lib.Models
     {
         public long TagId { get; set; }
         public Guid ArticleId { get; set; }
-        [JsonIgnore]
-        public virtual Tag Tag { get; set; }
-        [JsonIgnore]
-        public virtual Article Article { get; set; }
+        // [JsonIgnore]
+        // public virtual Tag Tag { get; set; }
+        // [JsonIgnore]
+        // public virtual Article Article { get; set; }
     }
 }

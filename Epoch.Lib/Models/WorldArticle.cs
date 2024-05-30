@@ -9,14 +9,12 @@ namespace Epoch.Lib.Models
     [Serializable]
     public class WorldArticle
     {
-        [XmlElement("World")]
         public Guid WorldId { get; set; }
-        [XmlElement("Article")]
         public Guid ArticleId { get; set; }
 
-        [JsonIgnore]
-        public virtual World World { get; set; }
-        [JsonIgnore]
-        public virtual Article Article { get; set; }
+        // [JsonIgnore]
+        // public virtual World World { get; set; }
+        // [JsonIgnore]
+        // public virtual Article Article { get; set; }
     }
 }

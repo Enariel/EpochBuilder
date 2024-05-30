@@ -18,20 +18,21 @@ internal class Program
         builder.Services.AddMudServices();
         builder.Services.AddBlazoredLocalStorage();
         builder.Services.AddScoped<IArticleService, ArticleService>();
-        builder.Services.AddScoped<BrowserDbAccessor>();
-        //
-        // string dbName = builder.Configuration.GetSection("IndexDb:DbName").Value;
-        // int version = int.Parse(builder.Configuration.GetSection("IndexDb:Version").Value);
-        // Console.WriteLine($"DbName: {dbName} Version: {version}");
 
         var host = builder.Build();
 
         using var scope = host.Services.CreateScope();
         await InitializeStoresAsync(scope);
-        await InitializeIndexDbAsync(scope);
 
         await host.RunAsync();
     }
+
+    private static async Task InitializeStoresAsync(IServiceScope scope)
+    {
+        var articleStore = scope.ServiceProvider.GetRequiredService<IArticleService>();
+        await articleStore.InitializeAsync();
+    }
+
     private static async Task InitializeIndexDbAsync(IServiceScope scope)
     {
         await using var db = scope.ServiceProvider.GetService<BrowserDbAccessor>();
@@ -39,11 +40,4 @@ internal class Program
             await db.InitializeAsync();
     }
 
-    private static async Task InitializeStoresAsync(IServiceScope scope)
-    {
-        var articleStore = scope.ServiceProvider.GetRequiredService<IArticleService>();
-        await articleStore.InitializeAsync();
-
-
-    }
 }

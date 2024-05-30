@@ -4,10 +4,11 @@
 namespace Epoch.Lib.Models
 {
     [Serializable]
-    public class Profile
+    public class ArticleSection
     {
-        public string Name { get; set; }
-        public string Description { get; set; }
+        public string Title { get; set; }
+        public string Content { get; set; }
+        public int Order { get; set; } = 0;
         public DateTime CreatedOn { get; set; } = DateTime.Now;
         public DateTime? ModifiedOn { get; set; }
     }
