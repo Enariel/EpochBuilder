@@ -1,0 +1,28 @@
+@using Epoch.Lib
+@using Epoch.Lib.Models
+
+<MudGrid>
+	<MudItem>
+		<MudPaper Class="pa-2">
+			<MudForm Model="@_world" @ref="@_form" @bind-Errors="@_errors" @bind-IsValid="@_isValid">
+				<MudText>ID: @_world.WorldId</MudText>
+				<MudTextField Label="Name" @bind-Value="@_world.WorldName" For="@(() => _world.WorldName)" />
+				<MudTextField Label="Description" @bind-Value="@_world.Description" For="@(() => _world.Description)" Lines="3" />
+				<MudButton OnClick="@SubmitWorld" Color="Color.Primary" Variant="Variant.Outlined">Submit</MudButton>
+			</MudForm>
+		</MudPaper>
+	</MudItem>
+	<MudItem>
+		<MudList>
+			@foreach (var world in Data.Worlds)
+			{
+				<MudListItem Text="@world.WorldId.ToString()" />
+			}
+		</MudList>
+	</MudItem>
+</MudGrid>
+
+@code {
+	[CascadingParameter] public SaveData Data { get; set; }
+	private World _world = new World();
+}
