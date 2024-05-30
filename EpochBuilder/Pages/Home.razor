@@ -5,8 +5,9 @@
 @using Microsoft.EntityFrameworkCore
 @using EpochBuilder.Components
 
+<TagCreate />
 <WorldCreate />
 
 @code{
-
+[Inject] protected EpochDbContext Ctx { get; set; }
 }

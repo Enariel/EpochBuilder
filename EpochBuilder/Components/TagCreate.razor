@@ -1,0 +1,3 @@
+<MudForm Model="@_tag" @ref="@_form" @bind-IsValid="@_isValid">
+	<MudTextField Adornment="Adornment.End" AdornmentColor="@((_isValid ? @Color.Success : Color.Error))" AdornmentIcon="@((_isValid ? Icons.TwoTone.Check : Icons.Material.TwoTone.Cancel))" OnAdornmentClick="@SubmitTag" Label="Tag" Variant="Variant.Outlined" Margin="Margin.Dense" @bind-Value="@_tag.Description" For="@(() => _tag.Description)" ShrinkLabel="true" AutoGrow="true" MaxLength="128" Required="true" />
+</MudForm>
