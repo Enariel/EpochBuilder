@@ -1,11 +1,12 @@
 ﻿@inherits LayoutComponentBase
+@inject IConfiguration Config
 
-<MudThemeProvider />
+<MudThemeProvider IsDarkMode="true" />
 
 <MudLayout>
 	<MudAppBar Elevation="1">
 		<MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
-		<MudText Typo="Typo.h5" Class="ml-3">Application</MudText>
+		<MudText Typo="Typo.h5" Class="ml-3">@Config["SiteSettings:Title"]</MudText>
 		<MudSpacer />
 		<MudIconButton Icon="@Icons.Material.Filled.MoreVert" Color="Color.Inherit" Edge="Edge.End" />
 	</MudAppBar>
@@ -13,7 +14,7 @@
 		<NavMenu />
 	</MudDrawer>
 	<MudMainContent>
-		<MudContainer>
+		<MudContainer MaxWidth="MaxWidth.ExtraLarge">
 			@Body
 		</MudContainer>
 	</MudMainContent>

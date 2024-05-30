@@ -1,5 +1,6 @@
 using Epoch.Lib;
 using Epoch.Lib.Models;
+using EpochBuilder.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.EntityFrameworkCore;
@@ -15,6 +16,7 @@ namespace EpochBuilder.Components
         private List<World> _worlds = new List<World>();
         [Inject] private ILogger<WorldCreate> Logger { get; set; }
         [Inject] private EpochDbContext Ctx { get; set; }
+        [Inject] private DataService DataService { get; set; }
 
         /// <inheritdoc />
         protected override async Task OnInitializedAsync()
@@ -36,12 +38,14 @@ namespace EpochBuilder.Components
                     Ctx.Worlds.Add(_world);
                     await Ctx.SaveChangesAsync();
                     await RefreshWorldListAsync();
+                    await DataService.UpdateDataAsync(Data);
                 }
                 catch (Exception e)
                 {
                     Logger.LogError(e.Message);
                 }
                 _world = new World();
+                await DataService.SaveDataAsync(Data);
             }
         }
     }

@@ -1,13 +1,15 @@
 ﻿@page "/"
-@using Epoch.Lib
-@using Components
-@using Epoch.Lib.Models
-@using Microsoft.EntityFrameworkCore
 @using EpochBuilder.Components
+@inject IConfiguration Config
+<HeadContent>
+	<PageTitle>
+		@Config["SiteSettings:Title"]
+	</PageTitle>
+</HeadContent>
 
-<TagCreate />
-<WorldCreate />
-
-@code{
-[Inject] protected EpochDbContext Ctx { get; set; }
-}
+<MudPaper Class="pa-6">
+	<MudStack>
+		<TagCreate />
+		<WorldCreate />
+	</MudStack>
+</MudPaper>

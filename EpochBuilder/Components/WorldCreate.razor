@@ -5,7 +5,7 @@
 	<MudItem xs="12" md="6">
 		<MudPaper Class="pa-2">
 			<MudForm Model="@_world" @ref="@_form" @bind-Errors="@_errors" @bind-IsValid="@_isValid">
-				<MudTextField Label="Name" @bind-Value="@_world.WorldName" For="@(() => _world.WorldName)" />
+				<MudTextField Label="Name" @bind-Value="@_world.Title" For="@(() => _world.Title)" />
 				<MudTextField Label="Description" @bind-Value="@_world.Description" For="@(() => _world.Description)" Lines="3" />
 				<MudButton OnClick="@SubmitWorld" Color="Color.Primary" Variant="Variant.Outlined">Submit</MudButton>
 			</MudForm>
@@ -17,7 +17,7 @@
 			{
 				<MudCard Class="pa-2 ma-1" @key="@world.WorldId">
 					<MudCardHeader>
-						<MudText Typo="Typo.h6">@world.WorldName <MudText>Active: @world.IsActive.ToString()</MudText></MudText>
+						<MudText Typo="Typo.h6">@world.Title <MudText>Active: @world.IsActive.ToString()</MudText></MudText>
 					</MudCardHeader>
 					<MudCardContent>
 						<MudText Typo="Typo.body2">@world.Description</MudText>

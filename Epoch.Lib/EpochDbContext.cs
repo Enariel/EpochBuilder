@@ -66,14 +66,59 @@ namespace Epoch.Lib
                  .OnDelete(DeleteBehavior.Cascade);
             });
 
+            builder.Entity<WorldHome>(e =>
+            {
+                e.HasKey(w => w.WorldId);
+                e.HasOne<World>()
+                 .WithOne(w => w.Home)
+                 .HasForeignKey<WorldHome>(wh => wh.WorldId)
+                 .OnDelete(DeleteBehavior.Cascade);
+            });
+
+            builder.Entity<WorldTime>(e =>
+            {
+                e.HasKey(w => w.WorldId);
+                e.HasOne<World>()
+                 .WithOne(w => w.Time)
+                 .HasForeignKey<WorldTime>(wh => wh.WorldId)
+                 .OnDelete(DeleteBehavior.Cascade);
+            });
+
+            builder.Entity<WorldOptions>(e =>
+            {
+                e.HasKey(w => w.WorldId);
+                e.HasOne<World>()
+                 .WithOne(w => w.Options)
+                 .HasForeignKey<WorldOptions>(wo => wo.WorldId)
+                 .OnDelete(DeleteBehavior.Cascade);
+            });
+
             builder.Entity<World>(e =>
             {
                 e.HasKey(w => w.WorldId);
                 e.Property(w => w.WorldId)
                  .ValueGeneratedOnAdd();
-                e.Property(w => w.WorldName).HasMaxLength(128);
+                e.Property(w => w.Title).HasMaxLength(128);
                 e.Property(w => w.Description).HasMaxLength(2000);
                 e.Property(w => w.Excerpt).HasMaxLength(255);
+                e.HasOne(w => w.Home)
+                 .WithOne()
+                 .HasForeignKey<WorldHome>(wh => wh.WorldId)
+                 .OnDelete(DeleteBehavior.Cascade);
+                e.HasOne(w => w.Options)
+                 .WithOne()
+                 .HasForeignKey<WorldOptions>(wo => wo.WorldId)
+                 .OnDelete(DeleteBehavior.Cascade);
+                e.HasOne(w => w.Time)
+                 .WithOne()
+                 .HasForeignKey<WorldTime>(wo => wo.WorldId)
+                 .OnDelete(DeleteBehavior.Cascade);
+                e.Navigation(w => w.Home)
+                 .AutoInclude();
+                e.Navigation(w => w.Options)
+                 .AutoInclude();
+                e.Navigation(w => w.Time)
+                 .AutoInclude();
             });
 
             builder.Entity<Article>(e =>

@@ -17,17 +17,16 @@ namespace Epoch.Lib.Models
             WorldTags = new HashSet<WorldTag>();
         }
 
-        [XmlAttribute("Id", typeof(Guid))]
         public Guid WorldId { get; set; } = Guid.NewGuid();
-        [XmlElement("Name")]
-        public string WorldName { get; set; }
-        [XmlElement("Description")]
+        public string Title { get; set; }
         public string Description { get; set; }
         public string Excerpt { get; set; }
         public bool IsActive { get; set; } = false;
         public DateTime? CreatedOn { get; set; }
         public DateTime? ModifiedOn { get; set; }
-
+        public virtual WorldOptions Options { get; set; }
+        public virtual WorldHome Home { get; set; }
+        public virtual WorldTime Time { get; set; }
         public virtual ICollection<WorldArticle> WorldArticles { get; set; }
         public virtual ICollection<WorldTag> WorldTags { get; set; }
     }

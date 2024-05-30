@@ -14,8 +14,7 @@ namespace Epoch.Lib.Models
             ArticleTags = new HashSet<ArticleTag>();
         }
 
-        [XmlAttribute("Id", typeof(Guid))]
-        public Guid ArticleId { get; set; } = Guid.NewGuid();
+        public Guid ArticleId { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
         public string SubTitle { get; set; }
