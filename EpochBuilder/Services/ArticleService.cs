@@ -7,6 +7,9 @@ using Epoch.Lib.Models;
 
 namespace EpochBuilder.Services
 {
+    /// <summary>
+    /// Represents a service that handles articles.
+    /// </summary>
     public class ArticleService : IArticleService
     {
         private readonly ILogger<IArticleService> _logger;
@@ -18,6 +21,7 @@ namespace EpochBuilder.Services
             _storage = storage;
         }
 
+        /// <inheritdoc />
         public async Task InitializeAsync()
         {
             var store = await _storage.GetItemAsync<ArticleStore>(StoreKeys.ArticleStoreKey);
@@ -28,19 +32,27 @@ namespace EpochBuilder.Services
             await _storage.SetItemAsync(StoreKeys.ArticleStoreKey, store);
         }
 
+        /// <inheritdoc />
         public async Task<List<Article>> IndexArticlesAsync()
         {
-            var articles = new List<Article>();
             var articleStore = await _storage.GetItemAsync<ArticleStore>(StoreKeys.ArticleStoreKey);
             if (articleStore != null)
-                return articles = articleStore.Articles;
-            return articles;
+                return articleStore.Articles;
+            return null;
+        }
+
+        /// <inheritdoc />
+        public async Task<Article> AddArticleAsync(Article article)
+        {
+            var store = await _storage.GetItemAsync<ArticleStore>(StoreKeys.ArticleStoreKey);
+            if (store == null || article == null)
+                return null;
+            if (store.Articles.Any(x => x.ArticleId == article.ArticleId))
+                article.ArticleId = Guid.NewGuid();
+            store.Articles.Add(article);
+            await _storage.SetItemAsync(StoreKeys.ArticleStoreKey, store);
+            return article;
         }
     }
 
-    public interface IArticleService
-    {
-        public Task InitializeAsync();
-        public Task<List<Article>> IndexArticlesAsync();
-    }
 }

@@ -6,8 +6,8 @@ using Epoch.Lib.Models;
 namespace Epoch.Lib
 {
     [Serializable]
-    public record ArticleStore
+    public record WorldStore
     {
-        public List<Article> Articles { get; set; } = new List<Article>();
+        public List<World> Worlds { get; set; } = new List<World>();
     }
 }

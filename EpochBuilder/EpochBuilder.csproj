@@ -24,7 +24,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Components\Articles\" />
       <Folder Include="Components\Worlds\" />
       <Folder Include="wwwroot\css\" />
     </ItemGroup>

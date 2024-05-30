@@ -1,0 +1,8 @@
+@namespace EpochBuilder.Components
+
+<MudForm Model="@Footer" @bind-IsValid="@_isValid">
+	<MudStack Justify="Justify.Center" Spacing="4" AlignItems="AlignItems.Center">
+		<MudTextField Label="Footnotes" @bind-Value="@Footer.Footnotes" For="@(() => Footer.Footnotes)" Lines="2" FullWidth="true" AutoGrow="true" />
+		<MudTextField Label="Author's Notes" @bind-Value="@Footer.AuthorsNotes" For="@(() => Footer.AuthorsNotes)" Lines="3" FullWidth="true" AutoGrow="true" />
+	</MudStack>
+</MudForm>
