@@ -8,32 +8,47 @@ namespace Epoch.Lib.Models
     [Serializable]
     public class Article
     {
-        public Article()
-        {
-            WorldArticles = new HashSet<WorldArticle>();
-            ArticleTags = new HashSet<ArticleTag>();
-        }
+        public Guid ArticleId { get; set; } = Guid.NewGuid();
+        public string Title { get; set; }
+        public string SubTitle { get; set; }
+        public string Content { get; set; }
+        public string Credits { get; set; }
+        public DateTime CreatedOn { get; set; } = DateTime.Now;
+        public DateTime? ModifiedOn { get; set; }
+        public Preferences Prefs { get; set; } = new Preferences();
+        public ArticleFooter Footer { get; set; } = new ArticleFooter();
+        public ArticleSideBar SideBar { get; set; } = new ArticleSideBar();
+        public List<ArticleSection> Sections { get; set; } = new List<ArticleSection>();
+        public List<Tag> Tags { get; set; } = new List<Tag>();
+    }
 
-        public Guid ArticleId { get; set; }
+    [Serializable]
+    public class ArticleSection
+    {
         public string Title { get; set; }
         public string Content { get; set; }
-        public string SubTitle { get; set; }
-        public string Credits { get; set; }
-        // Footer
+        public int Order { get; set; } = 0;
+        public DateTime CreatedOn { get; set; } = DateTime.Now;
+        public DateTime? ModifiedOn { get; set; }
+    }
+
+    [Serializable]
+    public class ArticleFooter
+    {
         public string Footnotes { get; set; }
         public string AuthorsNotes { get; set; }
-        // Sidebars
-        public string SidebarTop { get; set; }
-        public string SidebarTopContent { get; set; }
-        public string SidebarBottom { get; set; }
-        public string SidebarBottomContent { get; set; }
-        public DateTime? CreatedOn { get; set; }
+        public DateTime CreatedOn { get; set; } = DateTime.Now;
         public DateTime? ModifiedOn { get; set; }
+    }
 
-        // Prefs
-        [XmlElement("Preferences", typeof(Preferences))]
-        public virtual Preferences Prefs { get; set; } = new Preferences();
-        public virtual ICollection<WorldArticle> WorldArticles { get; set; }
-        public virtual ICollection<ArticleTag> ArticleTags { get; set; }
+    [Serializable]
+    public class ArticleSideBar
+    {
+        public string Top { get; set; }
+        public string TopContent { get; set; }
+        public string Bottom { get; set; }
+        public string BottomContent { get; set; }
+        public DateTime CreatedOn { get; set; } = DateTime.Now;
+        public DateTime? ModifiedOn { get; set; }
     }
 }

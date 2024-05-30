@@ -1,15 +1,8 @@
 ﻿@page "/"
-@using EpochBuilder.Components
-@inject IConfiguration Config
 <HeadContent>
-	<PageTitle>
-		@Config["SiteSettings:Title"]
-	</PageTitle>
+	<PageTitle>@Config["SiteSettings:Title"]</PageTitle>
 </HeadContent>
 
-<MudPaper Class="pa-6">
-	<MudStack>
-		<TagCreate />
-		<WorldCreate />
-	</MudStack>
-</MudPaper>
+@code{
+	[Inject] private IConfiguration Config { get; set; }
+}
